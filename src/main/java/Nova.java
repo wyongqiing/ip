@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Nova {
     public static void main(String[] args) {
         // Horizontal lines for aesthetics
@@ -8,9 +10,24 @@ public class Nova {
         System.out.println(" What can I do for you?");
         printHorizontalLine();
 
-        // For this skeletal version, the chatbot immediately exits
-        System.out.println(" Bye. Hope to see you again soon!");
-        printHorizontalLine();
+        Scanner sc = new Scanner(System.in);
+        String userInput;
+
+        // Continue until the user types "bye"
+        while (true) {
+            userInput = sc.nextLine();
+            if (userInput.equalsIgnoreCase("bye")) {
+                printHorizontalLine();
+                System.out.println(" Bye. Hope to see you again soon!");
+                printHorizontalLine();
+                break;
+            } else {
+                printHorizontalLine();
+                System.out.println(" " + userInput);
+                printHorizontalLine();
+            }
+        }
+        sc.close();
     }
 
     /**
