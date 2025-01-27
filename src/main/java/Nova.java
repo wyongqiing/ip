@@ -26,7 +26,7 @@ public class Nova {
                 System.out.println(" Bye. Hope to see you again soon!");
                 printHorizontalLine();
                 break;
-            }else if (userInput.equalsIgnoreCase("list")) {
+            } else if (userInput.equalsIgnoreCase("list")) {
                 // Display all stored tasks
                 printHorizontalLine();
                 if (tasks.isEmpty()) {
@@ -37,6 +37,20 @@ public class Nova {
                     }
                 }
                 printHorizontalLine();
+            } else if (userInput.startsWith("mark ")) {
+                // Mark a task as done
+                try {
+                    int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
+                    tasks.get(taskIndex).markAsDone();
+                    printHorizontalLine();
+                    System.out.println(" Nice! I've marked this task as done:");
+                    System.out.println("   " + tasks.get(taskIndex));
+                    printHorizontalLine();
+                } catch (Exception e) {
+                    printHorizontalLine();
+                    System.out.println(" Invalid task number. Please try again.");
+                    printHorizontalLine();
+                }
             } else {
                 // Add the task to the list
                 Task obj = new Task(userInput);
