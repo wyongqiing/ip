@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Nova {
     public static void main(String[] args) {
+
+        private static List<Task> tasks = new ArrayList<>();
         // Horizontal lines for aesthetics
         printHorizontalLine();
 
