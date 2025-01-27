@@ -51,6 +51,20 @@ public class Nova {
                     System.out.println(" Invalid task number. Please try again.");
                     printHorizontalLine();
                 }
+            } else if (userInput.startsWith("unmark ")) {
+                // Mark a task as not done
+                try {
+                    int taskIndex = Integer.parseInt(userInput.substring(7)) - 1;
+                    tasks.get(taskIndex).markAsNotDone();
+                    printHorizontalLine();
+                    System.out.println(" OK, I've marked this task as not done yet:");
+                    System.out.println("   " + tasks.get(taskIndex));
+                    printHorizontalLine();
+                } catch (Exception e) {
+                    printHorizontalLine();
+                    System.out.println(" Invalid task number. Please try again.");
+                    printHorizontalLine();
+                }
             } else {
                 // Add the task to the list
                 Task obj = new Task(userInput);
