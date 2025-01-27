@@ -3,9 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Nova {
+
+    private static List<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
 
-        private static List<Task> tasks = new ArrayList<>();
         // Horizontal lines for aesthetics
         printHorizontalLine();
 
@@ -25,6 +26,17 @@ public class Nova {
                 System.out.println(" Bye. Hope to see you again soon!");
                 printHorizontalLine();
                 break;
+            }else if (userInput.equalsIgnoreCase("list")) {
+                // Display all stored tasks
+                printHorizontalLine();
+                if (tasks.isEmpty()) {
+                    System.out.println(" No tasks found!");
+                } else {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(" " + (i + 1) + ". " + tasks.get(i));
+                    }
+                }
+                printHorizontalLine();
             } else {
                 printHorizontalLine();
                 System.out.println(" " + userInput);
