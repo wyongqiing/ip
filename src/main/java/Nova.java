@@ -38,8 +38,11 @@ public class Nova {
                 }
                 printHorizontalLine();
             } else {
+                // Add the task to the list
+                Task obj = new Task(userInput);
+                tasks.add(obj);
                 printHorizontalLine();
-                System.out.println(" " + userInput);
+                System.out.println(" added: " + userInput);
                 printHorizontalLine();
             }
         }
