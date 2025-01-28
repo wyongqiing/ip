@@ -29,7 +29,6 @@ public class Nova {
     }
 
     public static void main(String[] args) {
-
         Nova nova = new Nova();
         nova.start();
     }
