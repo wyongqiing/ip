@@ -22,6 +22,8 @@ public class TaskManager {
                 markTaskAsDone(command);
             } else if (command.startsWith("unmark ")) {
                 markTaskAsNotDone(command);
+            } else if (command.startsWith("delete ")) {
+                deleteTask(command);
             } else {
                 throw new NovaException("I'm sorry, but I don't understand that command.");
             }
@@ -110,14 +112,24 @@ public class TaskManager {
         }
     }
 
-//    private boolean isValidIndex(int index) {
-//        if (index >= 0 && index < tasks.size()) {
-//            return true;
-//        } else {
-//            printErrorMessage();
-//            return false;
-//        }
-//    }
+    private void deleteTask(String command) {
+        try {
+            // Extract and validate the task index
+            int index = parseTaskIndex(command, "delete");
+
+            // Remove the task and store it for confirmation
+            Task removedTask = tasks.remove(index);
+
+            // Print confirmation message
+            printHorizontalLine();
+            System.out.println(" Noted. I've removed this task:");
+            System.out.println("   " + removedTask);
+            System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
+            printHorizontalLine();
+        } catch (NovaException e) {
+            printErrorMessage(e.getMessage());
+        }
+    }
 
     private void printTaskAddedMessage(Task task) {
         printHorizontalLine();
