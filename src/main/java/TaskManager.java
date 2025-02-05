@@ -101,6 +101,7 @@ public class TaskManager {
     private void markTaskAsDone(String command) {
         int index = parseTaskIndex(command, "mark");
         tasks.get(index).markAsDone();
+        saveTasks();
         printTaskUpdatedMessage("Nice! I've marked this task as done:", tasks.get(index));
     }
 
