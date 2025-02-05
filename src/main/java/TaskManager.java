@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,10 +83,20 @@ public class TaskManager {
         if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
             throw new NovaException("Invalid deadline format! Use: 'deadline <description> /by <date>'");
         }
-        Task task = new Deadline(parts[0].trim(), parts[1].trim());
-        tasks.add(task);
-        saveTasks();
-        printTaskAddedMessage(task);
+
+        String description = parts[0].trim();
+        String byStr = parts[1].trim();
+
+        try {
+            // Parse the 'by' string into a LocalDateTime
+            LocalDateTime by = DateTimeParser.parse(byStr);
+            Task task = new Deadline(description, by);
+            tasks.add(task);
+            saveTasks();
+            printTaskAddedMessage(task);
+        } catch (DateTimeParseException e) {
+            throw new NovaException("Invalid date format! Please use 'M/d/yyyy HHmm'.");
+        }
     }
 
     private void addEvent(String command) {
@@ -171,9 +183,15 @@ public class TaskManager {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                Task task = Task.decode(line);
-                if (task != null) {
+                if (line.trim().isEmpty()) {
+                    continue; // Skip empty lines
+                }
+
+                try {
+                    Task task = Task.decode(line);
                     tasks.add(task);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Skipping invalid task: " + e.getMessage());
                 }
             }
         } catch (IOException e) {
