@@ -5,6 +5,10 @@ public class Deadline extends Task{
         super(description);
         this.by = by;
     }
+    @Override
+    public String encode() {
+        return "D | " + (isDone() ? "1" : "0") + " | " + getDescription() + " | " + by;
+    }
 
     @Override
     public String toString() {
