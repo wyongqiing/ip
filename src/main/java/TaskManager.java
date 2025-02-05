@@ -1,11 +1,18 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
-    private List<Task> tasks;
+    private final List<Task> tasks;
+    private final String folderPath = "./data";
+    private final String filePath = folderPath + "/nova.txt";
 
     public TaskManager() {
-        tasks = new ArrayList<>();
+        tasks = loadTasks();
     }
 
     public void handleCommand(String command) {
@@ -65,6 +72,7 @@ public class TaskManager {
         }
         Task task = new Todo(description);
         tasks.add(task);
+        saveTasks();
         printTaskAddedMessage(task);
     }
 
@@ -75,6 +83,7 @@ public class TaskManager {
         }
         Task task = new Deadline(parts[0].trim(), parts[1].trim());
         tasks.add(task);
+        saveTasks();
         printTaskAddedMessage(task);
     }
 
@@ -85,6 +94,7 @@ public class TaskManager {
         }
         Task task = new Event(parts[0].trim(), parts[1].trim(), parts[2].trim());
         tasks.add(task);
+        saveTasks();
         printTaskAddedMessage(task);
     }
 
@@ -97,6 +107,7 @@ public class TaskManager {
     private void markTaskAsNotDone(String command) {
         int index = parseTaskIndex(command, "unmark");
         tasks.get(index).markAsNotDone();
+        saveTasks();
         printTaskUpdatedMessage("OK, I've marked this task as not done yet:", tasks.get(index));
     }
 
@@ -116,10 +127,9 @@ public class TaskManager {
         try {
             // Extract and validate the task index
             int index = parseTaskIndex(command, "delete");
-
             // Remove the task and store it for confirmation
             Task removedTask = tasks.remove(index);
-
+            saveTasks();
             // Print confirmation message
             printHorizontalLine();
             System.out.println(" Noted. I've removed this task:");
@@ -129,6 +139,46 @@ public class TaskManager {
         } catch (NovaException e) {
             printErrorMessage(e.getMessage());
         }
+    }
+
+    private void saveTasks() {
+        try {
+            File folder = new File(folderPath);
+            if (!folder.exists() && !folder.mkdirs()) {
+                System.out.println("Failed to create directory: " + folderPath);
+            }
+
+            FileWriter writer = new FileWriter(filePath);
+            for (Task task : tasks) {
+                writer.write(task.encode() + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
+    }
+
+    private List<Task> loadTasks() {
+        List<Task> tasks = new ArrayList<>();
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            System.out.println("No existing data file found. Starting with an empty task list.");
+            return tasks;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Task task = Task.decode(line);
+                if (task != null) {
+                    tasks.add(task);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
+        }
+        return tasks;
     }
 
     private void printTaskAddedMessage(Task task) {
