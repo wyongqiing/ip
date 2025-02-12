@@ -1,6 +1,10 @@
 package nova.command;
 
-import nova.command.Command;
+import nova.exception.NovaException;
+import nova.task.Task;
+import nova.task.TaskList;
+import nova.ui.Storage;
+import nova.ui.UiNova;
 
 public class DeleteCommand implements Command {
     private final int index;
