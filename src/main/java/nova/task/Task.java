@@ -1,4 +1,4 @@
-import java.time.LocalDateTime;
+package nova.task;
 
 public abstract class Task {
     private String description;
@@ -35,7 +35,7 @@ public abstract class Task {
 
     public abstract String encode();
 
-    // Decode a task from a string and return a new Task object
+    // Decode a task from a string and return a new nova.task.Task object
     public static Task decode(String encodedTask) {
         if (encodedTask == null || encodedTask.trim().isEmpty()) {
             throw new IllegalArgumentException("Invalid encoded task format: empty or null string");

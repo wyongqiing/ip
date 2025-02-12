@@ -1,3 +1,5 @@
+package nova.command;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -6,7 +8,7 @@ public class AddDeadlineCommand implements Command {
     private final String byStr;
 
     /**
-     * Constructor for AddDeadlineCommand.
+     * Constructor for nova.command.AddDeadlineCommand.
      *
      * @param description The description of the deadline task.
      * @param byStr       The deadline in string format.
@@ -17,7 +19,7 @@ public class AddDeadlineCommand implements Command {
     }
 
     /**
-     * Executes the AddDeadlineCommand by adding a deadline task to the task list.
+     * Executes the nova.command.AddDeadlineCommand by adding a deadline task to the task list.
      *
      * @param taskList The task list to which the task is added.
      * @param ui       The UI to interact with the user.
@@ -30,7 +32,7 @@ public class AddDeadlineCommand implements Command {
             // Parse the deadline string into a LocalDateTime object
             LocalDateTime by = DateTimeParser.parse(byStr);
 
-            // Create a new Deadline task and add it to the task list
+            // Create a new nova.task.Deadline task and add it to the task list
             Task task = new Deadline(description, by);
             taskList.addTask(task);
 

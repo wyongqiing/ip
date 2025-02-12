@@ -1,3 +1,5 @@
+package nova.command;
+
 public interface Command {
     void execute(TaskList tasks, UiNova ui, Storage storage) throws NovaException;
 

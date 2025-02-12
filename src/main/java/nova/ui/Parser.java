@@ -1,10 +1,15 @@
+package nova.ui;
+
+import nova.command.*;
+import nova.exception.NovaException;
+
 public class Parser {
 
     /**
-     * Parses the user's input into the corresponding Command object.
+     * Parses the user's input into the corresponding nova.command.Command object.
      *
      * @param input The user's input string.
-     * @return The Command object representing the user's command.
+     * @return The nova.command.Command object representing the user's command.
      * @throws NovaException If the input is invalid or the command is not recognized.
      */
     public static Command parse(String input) throws NovaException {
@@ -81,11 +86,11 @@ public class Parser {
         try {
             int taskNumber = Integer.parseInt(input) - 1; // Convert to zero-based index
             if (taskNumber < 0) {
-                throw new NovaException("Task number must be a positive integer.");
+                throw new NovaException("nova.task.Task number must be a positive integer.");
             }
             return taskNumber;
         } catch (NumberFormatException e) {
-            throw new NovaException("Task number must be a valid integer.");
+            throw new NovaException("nova.task.Task number must be a valid integer.");
         }
     }
 }

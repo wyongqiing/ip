@@ -1,3 +1,7 @@
+package nova.command;
+
+import nova.command.Command;
+
 public class ListCommand implements Command {
 
     @Override

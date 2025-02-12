@@ -1,3 +1,8 @@
+package nova.ui;
+
+import nova.task.Task;
+import nova.task.TaskList;
+
 import java.util.Scanner;
 
 public class UiNova {
@@ -9,7 +14,7 @@ public class UiNova {
 
     public void printGreeting() {
         printHorizontalLine();
-        System.out.println(" Hello! I'm Nova");
+        System.out.println(" Hello! I'm nova.ui.Nova");
         System.out.println(" What can I do for you?");
         printHorizontalLine();
     }
