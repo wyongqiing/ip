@@ -1,36 +1,39 @@
 import java.util.Scanner;
 
 public class Nova {
+    private Storage storage;
+    private TaskList tasks;
+    private UiNova ui;
 
-    private TaskManager taskManager;
-
-    public Nova() {
-        taskManager = new TaskManager();
+    public Nova(String filePath) {
+        ui = new UiNova();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadTasks());
+        } catch (NovaException e) {
+            tasks = new TaskList();
+        }
     }
 
-    public void start() {
-        Scanner sc = new Scanner(System.in);
-
-        // Greeting message
-        taskManager.printGreeting();
-
-        while (true) {
-            String userInput = sc.nextLine();
-
-            if (userInput.equalsIgnoreCase("bye")) {
-                taskManager.printFarewell();
-                break;
+    public void run() {
+        ui.printGreeting();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.printHorizontalLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (NovaException e) {
+                ui.printErrorMessage(e.getMessage());
+            } finally {
+                ui.printHorizontalLine();
             }
-            // Delegate command handling to the TaskManager
-            taskManager.handleCommand(userInput);
         }
-
-        sc.close();
     }
 
     public static void main(String[] args) {
-        Nova nova = new Nova();
-        nova.start();
+        new Nova("data/nova.txt").run();
     }
-
 }

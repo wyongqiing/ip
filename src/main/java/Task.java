@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -33,9 +33,7 @@ public class Task {
         return getStatusIcon() + " " + description;
     }
 
-    public String encode() {
-        return "T | " + (isDone? "1" : "0") + " | " + description;
-    }
+    public abstract String encode();
 
     // Decode a task from a string and return a new Task object
     public static Task decode(String encodedTask) {
@@ -52,25 +50,16 @@ public class Task {
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
-        Task task = null;
+        Task task;
         switch (taskType) {
             case "T":
-                task = new Todo(description);
+                task = Todo.decode(encodedTask);
                 break;
             case "D":
-                if (parts.length < 4) {
-                    throw new IllegalArgumentException("Invalid encoded deadline task format: " + encodedTask);
-                }
-                LocalDateTime by = DateTimeParser.parse(parts[3]);
-                task = new Deadline(description, by);
+                task = Deadline.decode(encodedTask);
                 break;
             case "E":
-                if (parts.length < 5) {
-                    throw new IllegalArgumentException("Invalid encoded event task format: " + encodedTask);
-                }
-                String from = parts[3];
-                String to = parts[4];
-                task = new Event(description, from, to);
+                task = Event.decode(encodedTask);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown task type: " + taskType);
