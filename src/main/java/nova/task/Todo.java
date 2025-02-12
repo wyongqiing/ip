@@ -11,12 +11,23 @@ public class Todo extends Task {
     }
 
     public static Todo decode(String encodedTask) {
-        String[] parts = encodedTask.split("\\s*\\|\\s*");
+        String[] parts = encodedTask.split("\\s*\\|\\s*"); // Split using " | "
         if (parts.length < 3) {
             throw new IllegalArgumentException("Invalid encoded todo task format: " + encodedTask);
         }
-        return new Todo(parts[2]);
+
+        boolean isDone = parts[1].trim().equals("1"); // Check if marked done
+        String description = parts[2].trim();
+
+        Todo todo = new Todo(description);
+        if (isDone) {
+            todo.markAsDone(); // Ensure task is marked as done
+        }
+
+        return todo;
     }
+
+
 
     @Override
     public String encode() {
