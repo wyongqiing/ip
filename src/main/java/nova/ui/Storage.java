@@ -8,13 +8,29 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles loading and saving tasks from/to a file.
+ * This class manages persistent storage of tasks, ensuring that task lists are saved and loaded correctly.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a Storage instance with the given file path.
+     *
+     * @param filePath The path to the file used for storing tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the storage file.
+     * If the file does not exist, an empty task list is returned.
+     *
+     * @return A list of tasks retrieved from the file.
+     * @throws NovaException If an error occurs while reading the file.
+     */
     public List<Task> loadTasks() throws NovaException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -44,6 +60,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given task list to the storage file.
+     * If the storage directory does not exist, it is created.
+     *
+     * @param taskList The task list to be saved.
+     * @throws NovaException If an error occurs while writing to the file.
+     */
     public void saveTasks(TaskList taskList) throws NovaException {
         try {
             File file = new File(filePath);
