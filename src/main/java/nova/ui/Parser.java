@@ -3,14 +3,17 @@ package nova.ui;
 import nova.command.*;
 import nova.exception.NovaException;
 
+/**
+ * Parses user input and returns the corresponding Command object.
+ */
 public class Parser {
 
     /**
-     * Parses the user's input into the corresponding nova.command.Command object.
+     * Parses the user input into a Command.
      *
-     * @param input The user's input string.
-     * @return The nova.command.Command object representing the user's command.
-     * @throws NovaException If the input is invalid or the command is not recognized.
+     * @param input The user input string.
+     * @return The Command object corresponding to the input.
+     * @throws NovaException If the command is invalid.
      */
     public static Command parse(String input) throws NovaException {
         String[] words = input.trim().split(" ", 2);
