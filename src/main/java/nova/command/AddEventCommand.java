@@ -16,8 +16,8 @@ import nova.util.DateTimeParser;
  */
 public class AddEventCommand implements Command {
     private final String description;
-    private String fromStr;
-    private String toStr;
+    private String fromString;
+    private String toString;
 
     /**
      * Constructs an AddEventCommand with the given event description, start time, and end time.
@@ -28,8 +28,8 @@ public class AddEventCommand implements Command {
      */
     public AddEventCommand(String description, String from, String to) {
         this.description = description;
-        this.fromStr = from;
-        this.toStr = to;
+        this.fromString = from;
+        this.toString = to;
     }
 
     /**
@@ -44,8 +44,8 @@ public class AddEventCommand implements Command {
     @Override
     public void execute(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
         try {
-            LocalDateTime from = DateTimeParser.parse(fromStr);
-            LocalDateTime to = DateTimeParser.parse(toStr);
+            LocalDateTime from = DateTimeParser.parse(fromString);
+            LocalDateTime to = DateTimeParser.parse(toString);
             if (from.isAfter(to)) {
                 throw new NovaException("'from' date must be before 'to' date.");
             }
