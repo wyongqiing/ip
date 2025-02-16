@@ -5,6 +5,7 @@ import nova.exception.NovaException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks and provides methods to manipulate the tasks.
@@ -98,6 +99,12 @@ public class TaskList {
         if (index < 0 || index >= tasks.size()) {
             throw new NovaException("nova.task.Task number is invalid or out of range.");
         }
+    }
+
+    public List<Task> findTasks(String keyword) {
+        return tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }
 

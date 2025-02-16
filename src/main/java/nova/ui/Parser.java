@@ -49,6 +49,12 @@ public class Parser {
             case "list":
                 return new ListCommand();
 
+            case "find":
+                if (words.length < 2 || words[1].trim().isEmpty()) {
+                    throw new NovaException("Please provide a keyword to search.");
+                }
+                return new FindCommand(words[1].trim());
+
             case "mark":
                 if (words.length < 2 || words[1].trim().isEmpty()) {
                     throw new NovaException("Please specify the task number to mark as done.");

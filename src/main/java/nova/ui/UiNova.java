@@ -2,7 +2,7 @@ package nova.ui;
 
 import nova.task.Task;
 import nova.task.TaskList;
-
+import java.util.List;
 import java.util.Scanner;
 
 public class UiNova {
@@ -53,6 +53,19 @@ public class UiNova {
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + task);
         System.out.println(" Now you have " + taskCount + " tasks in the list.");
+        printHorizontalLine();
+    }
+
+    public void printTaskSearchResults(List<Task> matchingTasks) {
+        printHorizontalLine();
+        if (matchingTasks.isEmpty()) {
+            System.out.println("No matching tasks found.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println((i + 1) + "." + matchingTasks.get(i));
+            }
+        }
         printHorizontalLine();
     }
 
