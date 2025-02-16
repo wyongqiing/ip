@@ -11,6 +11,9 @@ import nova.ui.Storage;
 import nova.ui.UiNova;
 import nova.util.DateTimeParser;
 
+/**
+ * Represents a command to add a Deadline task.
+ */
 public class AddDeadlineCommand implements Command {
     private final String description;
     private final String byStr;

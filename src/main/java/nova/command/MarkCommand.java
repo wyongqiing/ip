@@ -6,13 +6,29 @@ import nova.task.TaskList;
 import nova.ui.Storage;
 import nova.ui.UiNova;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class MarkCommand implements Command {
     private final int index;
 
+    /**
+     * Constructs a MarkCommand with the specified task index.
+     *
+     * @param index The index of the task to be marked as done (zero-based).
+     */
     public MarkCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes the command to mark a task as done.
+     *
+     * @param taskList The list of tasks.
+     * @param ui       The user interface to display messages.
+     * @param storage  The storage handler to save updated tasks.
+     * @throws NovaException If the task index is invalid.
+     */
     @Override
     public void execute(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
         Task task = taskList.getTask(index);
