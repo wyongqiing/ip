@@ -44,4 +44,8 @@ public class Nova {
     public static void main(String[] args) {
         new Nova("data/nova.txt").run();
     }
+
+    public String getResponse(String input) {
+        return "Nova heard: " + input;
+    }
 }
