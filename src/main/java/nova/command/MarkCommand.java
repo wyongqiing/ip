@@ -36,4 +36,11 @@ public class MarkCommand implements Command {
         storage.saveTasks(taskList);
         ui.printTaskUpdatedMessage("Nice! I've marked this task as done:", task);
     }
+
+    @Override
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
+        execute(taskList, ui, storage);
+        return "Task marked as done: " + taskList.getTask(index);
+    }
+
 }
