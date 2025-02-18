@@ -32,4 +32,9 @@ public class ExitCommand implements Command {
     public boolean isExit() {
         return true; // Signals that this command will terminate the program
     }
+
+    @Override
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) {
+        return "Goodbye! See you next time!";
+    }
 }

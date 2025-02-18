@@ -36,4 +36,11 @@ public class DeleteCommand implements Command {
         storage.saveTasks(taskList);
         ui.printTaskDeletedMessage(removedTask, taskList.getSize());
     }
+
+    @Override
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
+        Task removedTask = taskList.removeTask(index);
+        storage.saveTasks(taskList);
+        return "Deleted task: " + removedTask;
+    }
 }

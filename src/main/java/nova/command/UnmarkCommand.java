@@ -37,4 +37,10 @@ public class UnmarkCommand implements Command {
         storage.saveTasks(taskList);
         ui.printTaskUpdatedMessage("OK, I've marked this task as not done yet:", task);
     }
+
+    @Override
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
+        execute(taskList, ui, storage);
+        return "Task unmarked: " + taskList.getTask(index);
+    }
 }

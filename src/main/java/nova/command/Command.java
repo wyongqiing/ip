@@ -22,6 +22,20 @@ public interface Command {
     void execute(TaskList tasks, UiNova ui, Storage storage) throws NovaException;
 
     /**
+     * Executes the command and returns a response string.
+     *
+     * @param taskList The list of tasks.
+     * @param ui       The UI instance.
+     * @param storage  The storage handler.
+     * @return Response string for GUI display.
+     * @throws NovaException If an error occurs during execution.
+     */
+    default String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
+        execute(taskList, ui, storage);
+        return "Command executed.";
+    }
+
+    /**
      * Determines whether this command signals the termination of the program.
      * By default, most commands do not exit the program.
      *

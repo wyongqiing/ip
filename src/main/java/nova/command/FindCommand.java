@@ -5,8 +5,9 @@ import nova.task.TaskList;
 import nova.ui.Storage;
 import nova.ui.UiNova;
 import nova.exception.NovaException;
-
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Represents a command that searches for tasks containing a keyword.
@@ -39,5 +40,22 @@ public class FindCommand implements Command {
 
         List<Task> matchingTasks = taskList.findTasks(keyword);
         ui.printTaskSearchResults(matchingTasks);
+    }
+
+    @Override
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
+        List<Task> matchingTasks = taskList.findTasks(keyword);
+
+        if (matchingTasks.isEmpty()) {
+            return "No matching tasks found.";
+        }
+
+        // Find the index manually by iterating over taskList
+        String result = IntStream.range(0, taskList.getSize())
+                .filter(i -> taskList.getTask(i).getDescription().contains(keyword))
+                .mapToObj(i -> (i + 1) + ". " + taskList.getTask(i)) // Convert index to 1-based
+                .collect(Collectors.joining("\n"));
+
+        return "Here are the matching tasks:\n" + result;
     }
 }

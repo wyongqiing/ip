@@ -43,4 +43,10 @@ public class AddTodoCommand implements Command {
         ui.printTaskAddedMessage(task, taskList.getSize());
     }
 
+    @Override
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
+        execute(taskList, ui, storage);
+        return "Added new task: [T][ ] " + description;
+    }
+
 }

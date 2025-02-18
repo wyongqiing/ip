@@ -57,4 +57,10 @@ public class AddEventCommand implements Command {
             throw new NovaException("Invalid date format! Supported formats: M/d/yyyy HHmm, yyyy-MM-dd HH:mm, yyyy-MM-dd.");
         }
     }
+
+    @Override
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
+        execute(taskList, ui, storage);
+        return "Added event: [E][ ] " + description + " (from: " + fromString + " to: " + toString + ")";
+    }
 }
