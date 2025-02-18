@@ -5,7 +5,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import nova.ui.DialogBox;
 import nova.ui.Nova;
 
 /**
@@ -23,8 +22,8 @@ public class MainWindow extends AnchorPane {
 
     private Nova nova;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image novaImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pingu.jpeg"));
+    private Image novaImage = new Image(this.getClass().getResourceAsStream("/images/potato.jpeg"));
 
     @FXML
     public void initialize() {
@@ -48,6 +47,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, novaImage)
         );
         userInput.clear();
+
+        // Close window if the user enters "bye"
+        if (input.equalsIgnoreCase("exit")) {
+            System.exit(0);
+        }
+
     }
 
 }
