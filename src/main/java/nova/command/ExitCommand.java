@@ -22,17 +22,6 @@ public class ExitCommand implements Command {
         ui.printFarewell();
         System.exit(0);
     }
-
-    /**
-     * Indicates that this command is an exit command.
-     *
-     * @return true, since executing this command should terminate the program.
-     */
-    @Override
-    public boolean isExit() {
-        return true; // Signals that this command will terminate the program
-    }
-
     @Override
     public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) {
         return "Goodbye! See you next time!";

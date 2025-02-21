@@ -1,11 +1,10 @@
 package nova.task;
 
-import nova.exception.NovaException;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import nova.exception.NovaException;
 
 /**
  * Represents a list of tasks and provides methods to manipulate the tasks.

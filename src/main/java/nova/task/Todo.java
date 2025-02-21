@@ -27,10 +27,8 @@ public class Todo extends Task {
         return todo;
     }
 
-
-
     @Override
     public String encode() {
-        return "T | " + (isDone()? "1" : "0") + " | " + getDescription();
+        return "T | " + (isDone() ? "1" : "0") + " | " + getDescription();
     }
 }

@@ -40,6 +40,6 @@ public class ListCommand implements Command {
         for (int i = 0; i < taskList.getSize(); i++) {
             sb.append(i + 1).append(". ").append(taskList.getTask(i)).append("\n");
         }
-        return sb.toString().trim(); // Remove trailing newline
+        return sb.toString().trim();
     }
 }
