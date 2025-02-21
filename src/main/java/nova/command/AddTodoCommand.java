@@ -11,8 +11,10 @@ import nova.ui.UiNova;
  * Represents a command to add a Todo task to the task list.
  */
 public class AddTodoCommand implements Command {
-
-    private String description;
+    private static final String ERROR_NULL_DESCRIPTION = "Description cannot be null";
+    private static final String ERROR_NULL_LIST = "TaskList should not be null";
+    private static final String ERROR_NULL_STORAGE = "Storage should not be null";
+    private final String description;
 
     /**
      * Constructs an AddTodoCommand with the given task description.
@@ -20,6 +22,7 @@ public class AddTodoCommand implements Command {
      * @param description The description of the todo task.
      */
     public AddTodoCommand(String description) {
+        assert description != null : ERROR_NULL_DESCRIPTION;
         this.description = description;
     }
 
@@ -48,5 +51,4 @@ public class AddTodoCommand implements Command {
         execute(taskList, ui, storage);
         return "Added new task: [T][ ] " + description;
     }
-
 }

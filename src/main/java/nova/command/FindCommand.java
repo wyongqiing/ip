@@ -1,18 +1,21 @@
 package nova.command;
 
+import nova.exception.NovaException;
 import nova.task.Task;
 import nova.task.TaskList;
 import nova.ui.Storage;
 import nova.ui.UiNova;
-import nova.exception.NovaException;
+import java.util.stream.IntStream;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 /**
  * Represents a command that searches for tasks containing a keyword.
  */
 public class FindCommand implements Command {
+    private static final String ERROR_NULL_KEYWORD = "Keyword cannot be null";
+
     private final String keyword;
 
     /**
@@ -21,6 +24,7 @@ public class FindCommand implements Command {
      * @param keyword The keyword to search for in task descriptions.
      */
     public FindCommand(String keyword) {
+        assert keyword != null : ERROR_NULL_KEYWORD;
         this.keyword = keyword;
     }
 

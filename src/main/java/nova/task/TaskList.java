@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  * Represents a list of tasks and provides methods to manipulate the tasks.
  */
 public class TaskList {
+    private static final String INVALID_INDEX_ERROR = "Index must be non-negative";
     private final List<Task> tasks;
 
     /**
@@ -96,6 +97,7 @@ public class TaskList {
      * @throws NovaException If the index is out of range.
      */
     private void validateIndex(int index) throws NovaException {
+        assert index >= 0 : INVALID_INDEX_ERROR;
         if (index < 0 || index >= tasks.size()) {
             throw new NovaException("nova.task.Task number is invalid or out of range.");
         }

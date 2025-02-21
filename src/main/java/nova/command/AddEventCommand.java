@@ -15,6 +15,13 @@ import nova.util.DateTimeParser;
  * Represents a command that adds an event task to the task list.
  */
 public class AddEventCommand implements Command {
+    private static final String NULL_DESCRIPTION_ERROR = "Description cannot be null";
+    private static final String NULL_START_DATE_ERROR = "Start date cannot be null";
+    private static final String NULL_END_DATE_ERROR = "End date cannot be null";
+    private static final String INVALID_DATE_ORDER_ERROR = "Start time must be before end time";
+    private static final String NULL_PARSED_DATE_ERROR = "Parsed dates should not be null";
+
+
     private final String description;
     private String fromString;
     private String toString;
@@ -27,6 +34,9 @@ public class AddEventCommand implements Command {
      * @param to          The end time of the event in string format.
      */
     public AddEventCommand(String description, String from, String to) {
+        assert description != null : NULL_DESCRIPTION_ERROR;
+        assert from != null : NULL_START_DATE_ERROR;
+        assert to != null : NULL_END_DATE_ERROR;
         this.description = description;
         this.fromString = from;
         this.toString = to;
@@ -46,6 +56,9 @@ public class AddEventCommand implements Command {
         try {
             LocalDateTime from = DateTimeParser.parse(fromString);
             LocalDateTime to = DateTimeParser.parse(toString);
+
+            assert from != null && to != null : NULL_PARSED_DATE_ERROR;
+            assert !from.isAfter(to) : INVALID_DATE_ORDER_ERROR;
             if (from.isAfter(to)) {
                 throw new NovaException("'from' date must be before 'to' date.");
             }
