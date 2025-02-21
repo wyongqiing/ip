@@ -1,18 +1,21 @@
 package nova.command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import nova.exception.NovaException;
 import nova.task.Task;
 import nova.task.TaskList;
 import nova.ui.Storage;
 import nova.ui.UiNova;
-import nova.exception.NovaException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Represents a command that searches for tasks containing a keyword.
  */
 public class FindCommand implements Command {
+    private static final String ERROR_NULL_KEYWORD = "Keyword cannot be null";
+
     private final String keyword;
 
     /**
@@ -21,6 +24,7 @@ public class FindCommand implements Command {
      * @param keyword The keyword to search for in task descriptions.
      */
     public FindCommand(String keyword) {
+        assert keyword != null : ERROR_NULL_KEYWORD;
         this.keyword = keyword;
     }
 
@@ -42,6 +46,15 @@ public class FindCommand implements Command {
         ui.printTaskSearchResults(matchingTasks);
     }
 
+    /**
+     * Executes the find command and returns the search results as a formatted string.
+     *
+     * @param taskList The task list to search in.
+     * @param ui       The UI (not used in this method).
+     * @param storage  The storage (not used in this method).
+     * @return A formatted string containing the matching tasks.
+     * @throws NovaException If the keyword is empty.
+     */
     @Override
     public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
         List<Task> matchingTasks = taskList.findTasks(keyword);
@@ -50,7 +63,6 @@ public class FindCommand implements Command {
             return "No matching tasks found.";
         }
 
-        // Find the index manually by iterating over taskList
         String result = IntStream.range(0, taskList.getSize())
                 .filter(i -> taskList.getTask(i).getDescription().contains(keyword))
                 .mapToObj(i -> (i + 1) + ". " + taskList.getTask(i)) // Convert index to 1-based
@@ -59,3 +71,4 @@ public class FindCommand implements Command {
         return "Here are the matching tasks:\n" + result;
     }
 }
+
