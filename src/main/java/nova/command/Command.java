@@ -34,14 +34,4 @@ public interface Command {
         execute(taskList, ui, storage);
         return "Command executed.";
     }
-
-    /**
-     * Determines whether this command signals the termination of the program.
-     * By default, most commands do not exit the program.
-     *
-     * @return {@code true} if the command is an exit command, {@code false} otherwise.
-     */
-    default boolean isExit() {
-        return false; // Default implementation: most commands are not exit commands
-    }
 }

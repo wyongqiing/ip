@@ -16,17 +16,17 @@ import nova.util.DateTimeParser;
  */
 public class AddDeadlineCommand implements Command {
     private final String description;
-    private final String byStr;
+    private final String byString;
 
     /**
      * Constructor for nova.command.AddDeadlineCommand.
      *
      * @param description The description of the deadline task.
-     * @param byStr       The deadline in string format.
+     * @param byString       The deadline in string format.
      */
-    public AddDeadlineCommand(String description, String byStr) {
+    public AddDeadlineCommand(String description, String byString) {
         this.description = description;
-        this.byStr = byStr;
+        this.byString = byString;
     }
 
     /**
@@ -41,7 +41,7 @@ public class AddDeadlineCommand implements Command {
     public void execute(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
         try {
             // Parse the deadline string into a LocalDateTime object
-            LocalDateTime by = DateTimeParser.parse(byStr);
+            LocalDateTime by = DateTimeParser.parse(byString);
 
             // Create a new nova.task.Deadline task and add it to the task list
             Task task = new Deadline(description, by);
@@ -60,6 +60,6 @@ public class AddDeadlineCommand implements Command {
     @Override
     public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
         execute(taskList, ui, storage);
-        return "Added deadline: [D][ ] " + description + " (by: " + byStr + ")";
+        return "Added deadline: [D][ ] " + description + " (by: " + byString + ")";
     }
 }

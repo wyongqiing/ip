@@ -38,6 +38,15 @@ public class UnmarkCommand implements Command {
         ui.printTaskUpdatedMessage("OK, I've marked this task as not done yet:", task);
     }
 
+    /**
+     * Executes the unmark command and returns a confirmation message.
+     *
+     * @param taskList The task list containing tasks.
+     * @param ui       The UI responsible for displaying output.
+     * @param storage  The storage component responsible for saving task changes.
+     * @return A formatted string confirming the task has been unmarked.
+     * @throws NovaException If the specified task index is invalid.
+     */
     @Override
     public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
         execute(taskList, ui, storage);
