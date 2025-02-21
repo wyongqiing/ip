@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import nova.exception.NovaException;
-import nova.task.Task;
 import nova.task.Event;
+import nova.task.Task;
 import nova.task.TaskList;
 import nova.ui.Storage;
 import nova.ui.UiNova;

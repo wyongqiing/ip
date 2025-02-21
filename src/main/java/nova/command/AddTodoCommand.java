@@ -12,8 +12,6 @@ import nova.ui.UiNova;
  */
 public class AddTodoCommand implements Command {
     private static final String ERROR_NULL_DESCRIPTION = "Description cannot be null";
-    private static final String ERROR_NULL_LIST = "TaskList should not be null";
-    private static final String ERROR_NULL_STORAGE = "Storage should not be null";
     private final String description;
 
     /**
