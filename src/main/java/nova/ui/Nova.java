@@ -24,7 +24,7 @@ public class Nova {
     }
 
 //    public void run() {
-//        ui.printGreeting();
+//        ui.printWelcomeMessage(); // Show welcome message on startup
 //        boolean isExit = false;
 //        while (!isExit) {
 //            try {
@@ -32,7 +32,6 @@ public class Nova {
 //                ui.printHorizontalLine();
 //                Command c = Parser.parse(fullCommand);
 //                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
 //            } catch (NovaException e) {
 //                ui.printErrorMessage(e.getMessage());
 //            } finally {
@@ -43,10 +42,6 @@ public class Nova {
 //
 //    public static void main(String[] args) {
 //        new Nova("data/nova.txt").run();
-//    }
-//
-//    public String getResponse(String input) {
-//        return "Nova heard: " + input;
 //    }
 
     /**

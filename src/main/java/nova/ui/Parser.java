@@ -18,8 +18,9 @@ public class Parser {
     public static Command parse(String input) throws NovaException {
         String[] words = input.trim().split(" ", 2);
         String commandWord = words[0].toLowerCase();
-
         switch (commandWord) {
+            case "help":
+                return new HelpCommand();
             case "todo":
                 if (words.length < 2 || words[1].trim().isEmpty()) {
                     throw new NovaException("The description of a todo cannot be empty.");
