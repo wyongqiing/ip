@@ -75,7 +75,6 @@ public class Parser {
                 }
                 int deleteIndex = parseTaskNumber(words[1].trim());
                 return new DeleteCommand(deleteIndex);
-
             case "bye":
                 return new ExitCommand();
 

@@ -2,9 +2,7 @@ package nova.command;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import nova.exception.NovaException;
 import nova.task.Task;
 import nova.task.TaskList;
 import nova.ui.Storage;
@@ -25,7 +23,7 @@ public class FindCommand implements Command {
      */
     public FindCommand(String keyword) {
         assert keyword != null : ERROR_NULL_KEYWORD;
-        this.keyword = keyword;
+        this.keyword = keyword.toLowerCase();
     }
 
     /**
@@ -34,18 +32,17 @@ public class FindCommand implements Command {
      * @param taskList The task list to search in.
      * @param ui       The UI for displaying results.
      * @param storage  The storage (not used in this command).
-     * @throws NovaException If the keyword is empty.
      */
     @Override
-    public void execute(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
-        if (keyword.trim().isEmpty()) {
-            throw new NovaException("Please provide a keyword to search.");
+    public void execute(TaskList taskList, UiNova ui, Storage storage) {
+        List<Task> matchingTasks = findMatchingTasks(taskList);
+
+        if (matchingTasks.isEmpty()) {
+            ui.printMessage("No tasks found matching: " + keyword);
+        } else {
+            ui.printTaskSearchResults(matchingTasks);
         }
-
-        List<Task> matchingTasks = taskList.findTasks(keyword);
-        ui.printTaskSearchResults(matchingTasks);
     }
-
     /**
      * Executes the find command and returns the search results as a formatted string.
      *
@@ -53,22 +50,43 @@ public class FindCommand implements Command {
      * @param ui       The UI (not used in this method).
      * @param storage  The storage (not used in this method).
      * @return A formatted string containing the matching tasks.
-     * @throws NovaException If the keyword is empty.
      */
     @Override
-    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) throws NovaException {
-        List<Task> matchingTasks = taskList.findTasks(keyword);
+    public String executeAndReturn(TaskList taskList, UiNova ui, Storage storage) {
+        List<Task> matchingTasks = findMatchingTasks(taskList);
 
         if (matchingTasks.isEmpty()) {
-            return "No matching tasks found.";
+            return "No matching tasks found for: " + keyword;
         }
 
-        String result = IntStream.range(0, taskList.getSize())
-                .filter(i -> taskList.getTask(i).getDescription().contains(keyword))
-                .mapToObj(i -> (i + 1) + ". " + taskList.getTask(i)) // Convert index to 1-based
-                .collect(Collectors.joining("\n"));
-
-        return "Here are the matching tasks:\n" + result;
+        return formatSearchResults(matchingTasks);
     }
+
+    /**
+     * Finds tasks that contain the keyword in either their description or tags.
+     *
+     * @param taskList The task list to search through.
+     * @return A list of tasks that match the search criteria.
+     */
+    private List<Task> findMatchingTasks(TaskList taskList) {
+        return taskList.getTasks().stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Formats the search results into a numbered list.
+     *
+     * @param matchingTasks The list of matching tasks.
+     * @return A formatted string of search results.
+     */
+    private String formatSearchResults(List<Task> matchingTasks) {
+        StringBuilder result = new StringBuilder("Here are the matching tasks:\n");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            result.append(i + 1).append(". ").append(matchingTasks.get(i)).append("\n");
+        }
+        return result.toString();
+    }
+
 }
 

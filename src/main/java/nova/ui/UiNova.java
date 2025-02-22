@@ -69,18 +69,16 @@ public class UiNova {
         printHorizontalLine();
     }
 
+    public void printMessage(String message) {
+        printHorizontalLine();
+        System.out.println(message);
+        printHorizontalLine();
+    }
+
     public void printTaskUpdatedMessage(String message, Task task) {
         printHorizontalLine();
         System.out.println(" " + message);
         System.out.println("   " + task);
-        printHorizontalLine();
-    }
-
-    public void showTaskRemoved(Task task, int taskCount) {
-        printHorizontalLine();
-        System.out.println(" Noted. I've removed this task:");
-        System.out.println("   " + task);
-        System.out.println(" Now you have " + taskCount + " tasks in the list.");
         printHorizontalLine();
     }
 
