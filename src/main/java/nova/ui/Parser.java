@@ -20,6 +20,8 @@ public class Parser {
         String commandWord = words[0].toLowerCase();
 
         switch (commandWord) {
+            case "help":
+                return new HelpCommand();
             case "todo":
                 if (words.length < 2 || words[1].trim().isEmpty()) {
                     throw new NovaException("The description of a todo cannot be empty.");

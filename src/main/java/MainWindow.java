@@ -30,9 +30,15 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setNova(Nova n) {
-        nova = n;
+    public void setNova(Nova nova) {
+        this.nova = nova;
+        showWelcomeMessage();
     }
+    private void showWelcomeMessage() {
+        String welcomeMessage = "Hello! I'm Nova 🤖\n" + "How can I assist you today?\n" + "Type 'help' to see available commands.";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMessage, novaImage));
+    }
+
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -48,7 +54,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        // Close window if the user enters "bye"
         if (input.equalsIgnoreCase("exit")) {
             System.exit(0);
         }

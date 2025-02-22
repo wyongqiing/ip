@@ -24,7 +24,7 @@ public class Nova {
     }
 
 //    public void run() {
-//        ui.printGreeting();
+//        ui.printWelcomeMessage(); // Show welcome message on startup
 //        boolean isExit = false;
 //        while (!isExit) {
 //            try {
