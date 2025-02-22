@@ -26,7 +26,8 @@ public class HelpCommand implements Command {
                 + "EVENT     - Adds an event. Usage: event <task> /from <start> /to <end>\n"
                 + "LIST      - Displays all tasks.\n"
                 + "DELETE    - Deletes a task. Usage: delete <task number>\n"
-                + "EXIT      - Closes the chatbot.\n"
+                + "EXIT      - Exits the application.\n"
+                + "BYE       - Closes the application.\n"
                 + "-------------------\n";
     }
 
