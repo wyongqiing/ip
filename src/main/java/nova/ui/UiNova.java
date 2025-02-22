@@ -12,25 +12,10 @@ public class UiNova {
         sc = new Scanner(System.in);
     }
 
-    public void printWelcomeMessage() {
-        System.out.println("Welcome to NovaBot!");
-        System.out.println("How can I assist you? Type 'help' to see available commands.");
-    }
-
-    public void printHelpMessage() {
+    public void printGreeting() {
         printHorizontalLine();
-        System.out.println("----------------------");
-        System.out.println("HELP       - Displays this help message.");
-        System.out.println("FIND       - Find tasks by keyword. Usage: find <keyword>");
-        System.out.println("LIST       - Displays all tasks.");
-        System.out.println("MARK       - Marks a task as completed. Usage: mark <task number>");
-        System.out.println("UNMARK     - Unmarks a completed task. Usage: unmark <task number>");
-        System.out.println("TODO       - Adds a todo. Usage: todo <task>");
-        System.out.println("DEADLINE   - Adds a deadline. Usage: deadline <task> /by <date>");
-        System.out.println("EVENT      - Adds an event. Usage: event <task> /from <start> /to <end>");
-        System.out.println("DELETE     - Deletes a task. Usage: delete <task number>");
-        System.out.println("EXIT       - Exits the program.");
-        System.out.println("BYE        - Ends the program.");
+        System.out.println(" Hello! I'm nova.ui.Nova");
+        System.out.println(" What can I do for you?");
         printHorizontalLine();
     }
 
