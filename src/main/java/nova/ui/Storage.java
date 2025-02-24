@@ -49,7 +49,9 @@ public class Storage {
 
                 try {
                     Task task = Task.decode(line);
-                    tasks.add(task);
+                    if (task != null) {
+                        tasks.add(task);
+                    }
                 } catch (IllegalArgumentException e) {
                     System.out.println("Skipping invalid task: " + e.getMessage());
                 }

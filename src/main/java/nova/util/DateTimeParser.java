@@ -10,6 +10,7 @@ public class DateTimeParser {
     private static final List<DateTimeFormatter> INPUT_FORMATTERS = Arrays.asList(
             DateTimeFormatter.ofPattern("M/d/yyyy HHmm"), // e.g., 2/12/2019 1800
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"), // e.g., 2025-02-10 18:00
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"), // ISO Format (with T)
             DateTimeFormatter.ofPattern("yyyy-MM-dd") // e.g., 2025-02-10
     );
 
@@ -23,6 +24,7 @@ public class DateTimeParser {
      * @throws DateTimeParseException If the input string cannot be parsed.
      */
     public static LocalDateTime parse(String dateTimeStr) throws DateTimeParseException {
+        dateTimeStr = dateTimeStr.replace("T", " ");
         for (DateTimeFormatter formatter : INPUT_FORMATTERS) {
             try {
                 return LocalDateTime.parse(dateTimeStr, formatter);

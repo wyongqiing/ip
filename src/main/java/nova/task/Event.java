@@ -1,11 +1,12 @@
 package nova.task;
 
-import nova.util.DateTimeParser;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import nova.util.DateTimeParser;
+
 public class Event extends Task {
+    private static final DateTimeFormatter SAVE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private LocalDateTime from;
     private LocalDateTime to;
 
@@ -22,8 +23,7 @@ public class Event extends Task {
 
     @Override
     public String encode() {
-        return "E | " + (isDone() ? "1" : "0") + " | " + getDescription() + " | " + from.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-                + " | " + to.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return "E | " + (isDone() ? "1" : "0") + " | " + getDescription() + " | " + from.format(SAVE_FORMATTER) + " | " + to.format(SAVE_FORMATTER);
     }
 
     public static Event decode(String encoded) {

@@ -9,7 +9,7 @@ import nova.util.DateTimeParser;
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
-    private static final String DEADLINE_FORMAT = "MMM dd yyyy, h:mm a";
+    private static final String DEADLINE_FORMAT = "yyyy-MM-dd HH:mm";
     private static final DateTimeFormatter SAVE_FORMATTER = DateTimeFormatter.ofPattern(DEADLINE_FORMAT);
     protected LocalDateTime by;
 
