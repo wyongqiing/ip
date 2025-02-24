@@ -1,9 +1,10 @@
 package nova.ui;
 
-import nova.task.Task;
-import nova.task.TaskList;
 import java.util.List;
 import java.util.Scanner;
+
+import nova.task.Task;
+import nova.task.TaskList;
 
 public class UiNova {
     private Scanner sc;
@@ -124,3 +125,4 @@ public class UiNova {
         printHorizontalLine();
     }
 }
+

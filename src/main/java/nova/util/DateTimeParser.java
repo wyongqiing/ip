@@ -8,9 +8,9 @@ import java.util.List;
 
 public class DateTimeParser {
     private static final List<DateTimeFormatter> INPUT_FORMATTERS = Arrays.asList(
-            DateTimeFormatter.ofPattern("M/d/yyyy HHmm"),   // e.g., 2/12/2019 1800
+            DateTimeFormatter.ofPattern("M/d/yyyy HHmm"), // e.g., 2/12/2019 1800
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"), // e.g., 2025-02-10 18:00
-            DateTimeFormatter.ofPattern("yyyy-MM-dd")       // e.g., 2025-02-10
+            DateTimeFormatter.ofPattern("yyyy-MM-dd") // e.g., 2025-02-10
     );
 
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
